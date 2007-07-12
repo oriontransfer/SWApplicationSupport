@@ -20,17 +20,18 @@
 
 - (void) addItem: (NSToolbarItem*)item;
 
-/* Protected */
+/* Used in subclasses awakeFromNib to setup the toolbar */
 - (void) setupToolbar;
+- (void) addDefaultItems; /* Spaces and lines */
 - (void) finishSetup;
 
 @end
 
 @interface NSToolbarItem (SWToolbar)
 
-+ toolbarItemWithIdentifier: (id)identifier;
-- (void) setName: (id)name andDescription: (id)description;
-- (void) setTarget: (id)target andAction: (SEL)action;
-- (void) setImageNamed: (id)name;
++ (NSToolbarItem*) toolbarItemWithIdentifier: (id)identifier;
+- (NSToolbarItem*) setName: (id)name andDescription: (id)description;
+- (NSToolbarItem*) setTarget: (id)target andAction: (SEL)action;
+- (NSToolbarItem*) setImageNamed: (id)name;
 
 @end

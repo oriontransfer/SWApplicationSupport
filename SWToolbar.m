@@ -28,7 +28,9 @@
 	[toolbar setDelegate:self];
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES];
-	
+}
+
+- (void) addDefaultItems {
 	[items setValue:self forKey:NSToolbarFlexibleSpaceItemIdentifier];
 	[items setValue:self forKey:NSToolbarSpaceItemIdentifier];
 	[items setValue:self forKey:NSToolbarSeparatorItemIdentifier];
@@ -86,23 +88,26 @@
 
 @implementation NSToolbarItem (SWToolbar)
 
-+ toolbarItemWithIdentifier: (id)identifier {
++ (NSToolbarItem*) toolbarItemWithIdentifier: (id)identifier {
 	return [[[self class] alloc] initWithItemIdentifier:identifier];
 }
 
-- (void) setName: (id)name andDescription: (id)description {
+- (NSToolbarItem*) setName: (id)name andDescription: (id)description {
 	[self setLabel:name];
 	[self setPaletteLabel:name];
 	[self setToolTip:description];
+	return self;
 }
 
-- (void) setTarget: (id)target andAction: (SEL)action {
+- (NSToolbarItem*) setTarget: (id)target andAction: (SEL)action {
 	[self setTarget:target];
 	[self setAction:action];
+	return self;
 }
 
-- (void) setImageNamed: (id)name {
+- (NSToolbarItem*) setImageNamed: (id)name {
 	[self setImage:[NSImage imageNamed:name]];
+	return self;
 }
 
 @end

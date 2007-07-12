@@ -10,11 +10,9 @@
 
 
 @interface SWSharedInspector : NSWindowController {
-	id document;
 }
 
 + (id) sharedInspector;
-- (id) document;
-- (void) setDocument: (id) document;
+- (void) show;
 
 @end
