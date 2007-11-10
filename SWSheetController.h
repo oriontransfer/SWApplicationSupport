@@ -14,7 +14,7 @@
 	IBOutlet NSWindow *sheet;
 	IBOutlet NSWindow *parent;
 	
-	bool nibLoaded;
+	BOOL nibLoaded;
 }
 
 - (id) init;
