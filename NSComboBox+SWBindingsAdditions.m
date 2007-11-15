@@ -13,8 +13,16 @@
 
 - (id) selectedObjectInArray: (id)collection {
 	int index = [self indexOfSelectedItem];
+	NSLog (@"Index: %d", index);
+	
 	NSArray *array = nil;
 	
+	if (index == -1) {
+		// We need to match by string value
+		index = [self indexOfItemWithObjectValue:[self stringValue]];
+	}
+	
+	// If index is still -1
 	if (index == -1) return nil;
 	
 	if ([collection isKindOfClass:[NSArray class]])

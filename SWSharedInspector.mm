@@ -24,6 +24,7 @@
 */
 
 - (void) _setupNotifications {
+	//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainWindowClosed:) name:NSWindowWillCloseNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainWindowChanged:) name:NSWindowDidBecomeMainNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainWindowResigned:) name:NSWindowDidResignMainNotification object:nil];
 }
@@ -52,15 +53,18 @@
 	[super dealloc];
 }
 
-
+- (void)mainWindowClosed:(NSNotification *)notification {
+	NSLog (@"%@ (Shared Inspector) mainWindowClosed", [self className]);
+	[self setMainWindow:nil];
+}
 
 - (void)mainWindowChanged:(NSNotification *)notification {
-	//NSLog (@"%@ (Shared Inspector) mainWindowChanged", [self className]);
+	NSLog (@"%@ (Shared Inspector) mainWindowChanged", [self className]);
     [self setMainWindow:[notification object]];
 }
 
 - (void)mainWindowResigned:(NSNotification *)notification {
-	//NSLog (@"%@ (Shared Inspector) mainWindowResigned", [self className]);
+	NSLog (@"%@ (Shared Inspector) mainWindowResigned", [self className]);
     [self setMainWindow:nil];
 }
 
@@ -70,10 +74,13 @@
 	if (mainWindow)
 		controller = [mainWindow windowController];
 	
-    if (controller && [controller document])
+    if (controller && [controller document]) {
         [self setDocument:[controller document]];
-    else
+		[self showWindow: self];
+    } else {
 		[self setDocument:nil];
+		[self close];
+	}
 
 }
 
@@ -90,6 +97,7 @@
 	
     [self setShouldCascadeWindows: NO];
     [self setWindowFrameAutosaveName: [self className]];
+	[self setShouldCloseDocument: NO];
 	
 	//[self setDocument: [self document]];
 }
