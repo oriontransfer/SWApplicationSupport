@@ -10,9 +10,17 @@
 
 @implementation NSString (SWStringEscapingAdditions)
 
-- (NSString*)substitute: (NSDictionary*)replacements {
-	/* implement me */
-	return [self copy];
+- (NSString*)substitute: (NSDictionary*)replacements {	
+	NSEnumerator * keyEnumerator = [replacements keyEnumerator];
+	NSMutableString * result = [self mutableCopy];
+	
+	NSString * key = nil;
+	while (key = [keyEnumerator nextObject]) {
+		NSString * value = [replacements objectForKey:key];
+		[result replaceOccurrencesOfString:key withString:value options:0 range:NSMakeRange(0, [result length])];
+	}
+	
+	return [result autorelease];
 }
 
 //"The %name% is feeling %feeling%!"
