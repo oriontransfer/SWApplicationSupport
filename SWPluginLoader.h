@@ -17,10 +17,10 @@
 	NSSet *loadedPlugins;
 	
 	NSString *bundleType;
+	NSString *applicationName;
 }
 
-- initWithBundleType: (NSString*)newBundleType;
-- init;
+- initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName;
 
 - (void) setDelegate: (id)newDelegate;
 - (id) delegate;

@@ -14,3 +14,10 @@
 - (void) copyToBuffer: (char*)buffer maxLength: (size_t)length;
 
 @end
+
+@interface NSMutableData (PopLine)
+
+// Reads a whole line off the front of the data, and removes any data transformed into a line.
+- (NSString*) popLine;
+
+@end

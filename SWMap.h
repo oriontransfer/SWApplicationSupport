@@ -22,7 +22,7 @@
 
 @end
 
-@interface SWMutableMap : Map {
+@interface SWMutableMap : SWMap {
 
 }
 

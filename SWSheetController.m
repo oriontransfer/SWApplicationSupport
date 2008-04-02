@@ -46,8 +46,11 @@
 - (id) sheet {
 	NSString* nibName = [self nibName];
 	
-	if (nibLoaded == NO && nibName)
-		nibLoaded = [NSBundle loadNibNamed:[self nibName] owner:self];
+	if (sheet == nil && nibName) {
+		BOOL result = [NSBundle loadNibNamed:[self nibName] owner:self];
+		
+		NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
+	}
 	
 	return sheet;
 }

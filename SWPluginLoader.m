@@ -11,16 +11,13 @@
 
 @implementation SWPluginLoader
 
-- initWithBundleType: (NSString*)newBundleType {
+- initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName {
 	if (self = [super init]) {
 		bundleType = [newBundleType copy];
+		applicationName = [appName copy];
 	}
 	
 	return self;
-}
-
-- init {
-	return [self initWithBundleType:@"bundle"];
 }
 
 - (void) setDelegate: (id)newDelegate {
@@ -36,7 +33,7 @@
 	if (!applicationPluginSearchPaths) {
 		NSBundle *appBundle;
 		
-		NSString *appSupportSubpath = @"Application Support/Property Manager/PlugIns";
+		NSString *appSupportSubpath = [NSString stringWithFormat:@"/Application Support/%@/PlugIns", applicationName];
 		appBundle = [NSBundle mainBundle];
 		NSString *builtInPath = [[NSBundle mainBundle] builtInPlugInsPath];
 		NSArray *librarySearchPaths;
@@ -138,6 +135,12 @@
 
 - (void) dealloc {
 	[self invalidateAllPlugins];
+	
+	[bundleType release];
+	bundleType = nil;
+	
+	[applicationName release];
+	applicationName = nil;
 	
 	[super dealloc];
 }

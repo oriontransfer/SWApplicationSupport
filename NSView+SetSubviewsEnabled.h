@@ -8,8 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface NSBox (SWEnabledAddition)
+@interface NSView (SWEnabledAddition)
 
 - (void) setSubviewsEnabled: (BOOL)enabled;
 
