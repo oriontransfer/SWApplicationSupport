@@ -3,7 +3,7 @@
 //  Telephone Operator
 //
 //  Created by Sammi on 20/10/05.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "NSView+SetSubviewsEnabled.h"

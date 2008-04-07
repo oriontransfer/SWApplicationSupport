@@ -3,7 +3,7 @@
 //  GPS Tool
 //
 //  Created by Samuel Williams on 29/03/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
+//  Copyright 2008 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "SWBufferedPipe.h"
@@ -40,6 +40,8 @@
 
 - (void) dealloc
 {
+	NSLog (@"%s", __PRETTY_FUNCTION__);
+	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	if ([data length] > 0)

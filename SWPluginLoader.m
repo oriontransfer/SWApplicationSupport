@@ -3,7 +3,7 @@
 //  Property Manager
 //
 //  Created by Sammi Williams on 3/08/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "SWPluginLoader.h"
@@ -63,7 +63,7 @@
 - (NSSet*) pluginPaths {
 	if (!pluginPaths) {
 		NSSet *paths = [self applicationPluginSearchPaths];
-		NSMutableArray *bundlePaths = [NSMutableArray new];
+		NSMutableArray *bundlePaths = [[NSMutableArray new] autorelease];
 		
 		NSRange progress = NSMakeRange(0, [paths count]);
 		
@@ -90,7 +90,7 @@
 - (NSSet*) loadAllPlugins {
 	if (!loadedPlugins) {
 		NSSet *bundlePaths = [self pluginPaths];
-		NSMutableArray *allBundles = [NSMutableArray new];
+		NSMutableArray *allBundles = [[NSMutableArray new] autorelease];
 		
 		NSRange progress = NSMakeRange(0, [bundlePaths count]);
 		

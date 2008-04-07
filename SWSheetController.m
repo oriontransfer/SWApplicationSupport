@@ -3,12 +3,17 @@
 //  Property Manager
 //
 //  Created by Sammi on 10/07/05.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Copyright 2005 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "SWSheetController.h"
 
+const NSInteger SWSheetCancelled = -1;
+const NSInteger SWSheetProcessed = 0;
+
 @implementation SWSheetController
+
+@synthesize delegate;
 
 - (IBAction)showSheet: (id)sender {
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
@@ -27,13 +32,16 @@
 	[NSApp endSheet:[self sheet] returnCode:0];
 }
 
-- (void)sheetDidEnd:(NSWindow *)_sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+- (void)sheetDidEnd:(NSWindow *)_sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {	
+	if ([delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
+		[delegate sheetController:self didEndWithResult:returnCode];
+	
 	[sheet close];
 }
 
 - (id) init {
 	if (self = [super init]) {
-		nibLoaded = NO;
+
 	}
 	
 	return self;
@@ -76,12 +84,5 @@
 	else
 		return nil;
 }
-
-@end
-
-
-/* Compatibility */
-
-@implementation SWDisplaySheet
 
 @end

@@ -3,7 +3,7 @@
 //  SWCryptography
 //
 //  Created by Sammi Williams on 20/02/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "NSData+CopyToBuffer.h"
@@ -55,7 +55,7 @@
 	
 	//NSLog (@"Popping line: %@", line);
 	
-	return line;
+	return [line autorelease];
 }
 
 @end

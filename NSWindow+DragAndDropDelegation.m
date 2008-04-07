@@ -3,7 +3,7 @@
 //  GPS Tool
 //
 //  Created by Samuel Williams on 3/04/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
+//  Copyright 2008 Samuel Williams, Orion Transfer Ltd. All rights reserved.
 //
 
 #import "NSWindow+DragAndDropDelegation.h"
