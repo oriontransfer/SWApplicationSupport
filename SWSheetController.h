@@ -28,8 +28,12 @@
 
 /* This controller can be used to connect two separate NIBs together */
 
-const NSInteger SWSheetCancelled;
-const NSInteger SWSheetProcessed;
+// 10.5 only
+//const NSInteger SWSheetCancelled;
+//const NSInteger SWSheetProcessed;
+
+const int SWSheetCancelled;
+const int SWSheetProcessed;
 
 @interface SWSheetController : NSObject {
 	IBOutlet NSWindow *sheet;
@@ -51,12 +55,16 @@ const NSInteger SWSheetProcessed;
 /* Convenience function */
 - (id)document;
 
-@property(assign) id delegate;
+//@property(assign) id delegate;
+
+- (void) setDelegate: (id)delegate;
+- (id) delegate;
+
 
 @end
 
 @interface NSObject (SWSheetControllerDelegate)
 
-- (void) sheetController: (SWSheetController*)controller didEndWithResult:(NSInteger) result;
+- (void) sheetController: (SWSheetController*)controller didEndWithResult:(int) result;
 
 @end

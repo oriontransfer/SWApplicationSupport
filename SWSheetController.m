@@ -8,12 +8,25 @@
 
 #import "SWSheetController.h"
 
-const NSInteger SWSheetCancelled = -1;
-const NSInteger SWSheetProcessed = 0;
+// 10.5 only
+//const NSInteger SWSheetCancelled = -1;
+//const NSInteger SWSheetProcessed = 0;
+
+const int SWSheetCancelled = -1;
+const int SWSheetProcessed = 0;
 
 @implementation SWSheetController
 
-@synthesize delegate;
+// 10.5
+//@synthesize delegate;
+
+- (void) setDelegate: (id)_delegate {
+	delegate = _delegate;
+}
+
+- (id) delegate {
+	return delegate;
+}
 
 - (IBAction)showSheet: (id)sender {
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
