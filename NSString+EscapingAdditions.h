@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface NSString (SWStringEscapingAdditions)
 
 - (NSString*)quote;

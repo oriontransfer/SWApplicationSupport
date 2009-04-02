@@ -43,7 +43,7 @@
 }
 
 - (NSString*) quote { 
-    return [NSString stringWithFormat:@"\"%@\"", self?self:@""]; 
+    return [NSString stringWithFormat:@"\"%@\"", [self escapeCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]]]; 
 }
 
 - (NSString*) unquote {
