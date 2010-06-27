@@ -60,7 +60,12 @@ static void initStorage(void) {
     if (![self predicate]) {
 		// Need to extract pointer from key
 		NSString *ptrKey = [key substringWithRange:NSMakeRange(1, [key length] - 2)];
-		NSPredicate *pred = NSMapGet(predicates, (void*)atol([ptrKey UTF8String]));
+		
+		void * key = NULL;
+		sscanf([ptrKey UTF8String], "%p", &key);
+
+		NSPredicate *pred = NSMapGet(predicates, key);
+		
 		[self setPredicate:pred];
 		
         return self;
@@ -109,8 +114,8 @@ static void initStorage(void) {
         [filterPredicate release];
         filterPredicate = [newPredicate retain];
 		
-		NSMapInsertIfAbsent(predicates, (void*)self, (void*)newPredicate);
-        //[predicates setValue:newPredicate forKey:[NSString stringWithFormat:@"a%ld", (id)self]];
+		void * key = (void*)self;
+		NSMapInsertIfAbsent(predicates, key, (void*)newPredicate);
         
         [self updateChildrenKeyPath];
     }
@@ -133,7 +138,7 @@ static void initStorage(void) {
     
     if ([self filterPredicate]) {
 		// %qu is unsigned long long - ie 64 bit for compatibility with 64 bit platforms
-		NSString *proxyKeyPath = [NSString stringWithFormat:@"%@.%@.%@", @"predicateProxy", [NSString stringWithFormat:@"P%quP", (unsigned long long)self], realChildrenKeyPath];
+		NSString *proxyKeyPath = [NSString stringWithFormat:@"%@.%@.%@", @"predicateProxy", [NSString stringWithFormat:@"P%pP", self], realChildrenKeyPath];
 		NSLog (@"Proxy Key Path: %@", proxyKeyPath);
 		[super setChildrenKeyPath:proxyKeyPath];
 	} else
