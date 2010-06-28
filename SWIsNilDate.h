@@ -17,3 +17,8 @@
 }
 
 @end
+
+@interface SWBlankStringIsNil : NSValueTransformer {
+}
+
+@end
