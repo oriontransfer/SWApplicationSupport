@@ -23,7 +23,7 @@
 	NSEnumerator *iter = [subviews objectEnumerator];
 	id childView;
 	
-	while (childView = [iter nextObject]) {
+	while ((childView = [iter nextObject])) {
 		//NSLog (@"%@", childView);
 		if ([childView respondsToSelector:@selector(setEnabled:)])
 			[childView setEnabled:enabled];
