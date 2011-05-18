@@ -1,9 +1,9 @@
 //
-//  PointSet.m
-//  Asteroid Miner
+//  SWPointSet.m
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi on 13/05/05.
-//  Copyright 2005 Sammi Williams. All rights reserved.
+//  Created by Samuel Williams on 13/05/05.
+//  Copyright 2005 Samuel Williams. All rights reserved.
 //
 
 #import "SWPointSet.h"

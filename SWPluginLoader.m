@@ -1,9 +1,9 @@
 //
 //  SWPlugin.m
-//  Property Manager
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi Williams on 3/08/06.
-//  Copyright 2006 Samuel Williams, Orion Transfer Ltd. All rights reserved.
+//  Created by Samuel Williams on 3/08/06.
+//  Copyright 2006 Samuel Williams. All rights reserved.
 //
 
 #import "SWPluginLoader.h"

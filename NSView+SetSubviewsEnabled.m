@@ -1,9 +1,9 @@
 //
 //  NSBox (SWEnabledAddition).m
-//  Telephone Operator
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi on 20/10/05.
-//  Copyright 2005 Samuel Williams, Orion Transfer Ltd. All rights reserved.
+//  Created by Samuel Williams on 20/10/05.
+//  Copyright 2005 Samuel Williams. All rights reserved.
 //
 
 #import "NSView+SetSubviewsEnabled.h"

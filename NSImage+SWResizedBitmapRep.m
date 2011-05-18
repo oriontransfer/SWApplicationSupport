@@ -3,7 +3,7 @@
 //  Gocoa
 //
 //  Created by Samuel Williams on 9/01/11.
-//  Copyright 2011 Orion Transfer Ltd. All rights reserved.
+//  Copyright 2011 Samuel Williams. All rights reserved.
 //
 
 #import "NSImage+SWResizedBitmapRep.h"

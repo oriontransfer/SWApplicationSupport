@@ -1,9 +1,9 @@
 //
 //  SWImageAdditions.h
-//  Property Manager
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi Williams on 24/06/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Created by Samuel Williams on 24/06/06.
+//  Copyright 2006 Samuel Williams. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

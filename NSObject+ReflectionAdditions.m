@@ -1,9 +1,9 @@
 //
 //  ObjectSubclassesAddition.m
-//  Asteroid Miner
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi on 2/06/05.
-//  Copyright 2005 Orion Transfer Ltd. All rights reserved.
+//  Created by Samuel Williams on 2/06/05.
+//  Copyright 2005 Samuel Williams. All rights reserved.
 //
 
 #import "NSObject+ReflectionAdditions.h"

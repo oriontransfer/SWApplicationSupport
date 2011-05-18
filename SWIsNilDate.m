@@ -1,9 +1,9 @@
 //
 //  SWIsNilDate.m
-//  Property Manager
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
-//  Created by Sammi on 19/10/05.
-//  Copyright 2005 __MyCompanyName__. All rights reserved.
+//  Created by Samuel Williams on 19/10/05.
+//  Copyright 2005 Samuel Williams. All rights reserved.
 //
 
 #import "SWIsNilDate.h"

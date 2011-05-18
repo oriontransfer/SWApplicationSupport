@@ -1,9 +1,9 @@
 //
 //  NSWindow+DragAndDropDelegation.m
-//  GPS Tool
+//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
 //
 //  Created by Samuel Williams on 3/04/08.
-//  Copyright 2008 Samuel Williams, Orion Transfer Ltd. All rights reserved.
+//  Copyright 2008 Samuel Williams. All rights reserved.
 //
 
 #import "NSWindow+DragAndDropDelegation.h"

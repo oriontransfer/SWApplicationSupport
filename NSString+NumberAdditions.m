@@ -2,8 +2,8 @@
 //  NSString+NumberAdditions.m
 //  SWNetworking
 //
-//  Created by Sammi Williams on 7/01/06.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Created by Samuel Williams on 7/01/06.
+//  Copyright 2006 Samuel Williams. All rights reserved.
 //
 
 #import "NSString+NumberAdditions.h"

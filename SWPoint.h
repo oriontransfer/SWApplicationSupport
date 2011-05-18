@@ -2,8 +2,8 @@
  *  SWPoint.h
  *  Super Tanks
  *
- *  Created by Sammi Williams on 2/06/06.
- *  Copyright 2006 __MyCompanyName__. All rights reserved.
+ *  Created by Samuel Williams on 2/06/06.
+ *  Copyright 2006 Samuel Williams. All rights reserved.
  *
  */
 
