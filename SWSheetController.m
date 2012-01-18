@@ -8,28 +8,19 @@
 
 #import "SWSheetController.h"
 
-// 10.5 only
-//const NSInteger SWSheetCancelled = -1;
-//const NSInteger SWSheetProcessed = 0;
-
-const int SWSheetCancelled = -1;
-const int SWSheetProcessed = 0;
+const NSInteger SWSheetCancelled = -1;
+const NSInteger SWSheetProcessed = 0;
 
 @implementation SWSheetController
 
-// 10.5
-//@synthesize delegate;
-
-- (void) setDelegate: (id)_delegate {
-	delegate = _delegate;
-}
-
-- (id) delegate {
-	return delegate;
-}
+@synthesize sheet, parent, delegate;
 
 - (IBAction)showSheet: (id)sender {
-	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
+    if (!sheet)
+        [self loadSheet];
+    
+    NSAssert(sheet != nil, @"Sheet was not loaded or set correctly!");
+    
 	[NSApp beginSheet: [self sheet]
 	   modalForWindow: parent
 		modalDelegate: self
@@ -46,10 +37,10 @@ const int SWSheetProcessed = 0;
 }
 
 - (void)sheetDidEnd:(NSWindow *)_sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {	
-	if ([delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
-		[delegate sheetController:self didEndWithResult:returnCode];
+	[sheet orderOut:self];
 	
-	[sheet close];
+    if ([delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
+		[delegate sheetController:self didEndWithResult:returnCode];
 }
 
 - (id) init {
@@ -64,7 +55,7 @@ const int SWSheetProcessed = 0;
 	return nil;
 }
 
-- (id) sheet {
+- (void) loadSheet {
 	NSString* nibName = [self nibName];
 	
 	if (sheet == nil && nibName) {
@@ -72,8 +63,6 @@ const int SWSheetProcessed = 0;
 		
 		NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
 	}
-	
-	return sheet;
 }
 
 - (id)document {

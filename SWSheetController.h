@@ -20,24 +20,27 @@ const NSInteger SWSheetProcessed;
 	id delegate;
 }
 
+@property(nonatomic,retain) NSWindow * sheet;
+@property(nonatomic,retain) NSWindow * parent;
+@property(assign) id delegate;
+
 - (id) init;
-/* Override this to return the name of the nib that contains the sheet */
+
+// Used internally to load the sheet from a NIB file if it hasn't been explicitly set.
+- (void) loadSheet;
+// Override this to return the name of the nib that contains the sheet.
 - (NSString*) nibName;
-- (id) sheet;
 
 - (IBAction) showSheet: (id)sender;
 - (IBAction) cancelSheet: (id) sender;
 - (IBAction) processSheet: (id) sender;
+
+// Callback
 - (void) sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 
-/* Convenience function */
+// Convenience function
 - (id)document;
-
-//@property(assign) id delegate;
-
-- (void) setDelegate: (id)delegate;
-- (id) delegate;
-
+- (id)managedObjectContext;
 
 @end
 

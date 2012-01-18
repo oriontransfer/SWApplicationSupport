@@ -11,6 +11,7 @@
 @interface SWBufferedPipe : NSObject {
 	NSPipe * pipe;
 	NSMutableData * data;
+	NSFileHandle * handle;
 	
 	id delegate;
 }
@@ -23,8 +24,12 @@
 
 @property(assign) id delegate;
 
+- (void) readInBackgroundAndNotify;
+- (void) readToEndOfFileInBackgroundAndNotify;
+
 @end
 
 @interface NSObject (SWBufferedPipeDelegate)
-- (void) bufferedPipe: (SWBufferedPipe*)buf hasNewDataAvailable: (NSData*)data;
+- (void) bufferedPipe: (SWBufferedPipe*)buffer dataAvailable: (NSData*)data;
+- (void) bufferedPipe: (SWBufferedPipe*)buffer dataFinished: (NSData*)data;
 @end

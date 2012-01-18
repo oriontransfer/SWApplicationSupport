@@ -9,11 +9,9 @@
 #import "SWBufferedPipe.h"
 
 @interface SWBufferedPipe(Private)
-
 - (void) _setupPipe: (NSPipe *) pipe;
-
-- (void) _readComplete: (NSNotification *)note;
-
+- (void) _dataAvailable: (NSNotification *)note;
+- (void) _dataFinished: (NSNotification*)note;
 @end
 
 @implementation SWBufferedPipe
@@ -23,29 +21,28 @@
 - (id) init
 {
 	self = [super init];
+    
 	if (self != nil) {
 		[self _setupPipe:[NSPipe pipe]];
 	}
+    
 	return self;
 }
 
-- (id) initWithPipe: (NSPipe *) newPipe;
+- (id) initWithPipe: (NSPipe *)newPipe;
 {
 	self = [super init];
+    
 	if (self != nil) {
 		[self _setupPipe:newPipe];
 	}
-	return self;
+	
+    return self;
 }
 
 - (void) dealloc
-{
-	NSLog (@"%s", __PRETTY_FUNCTION__);
-	
+{	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-
-	if ([data length] > 0)
-		NSLog (@"Buffer deallocated with data remaining: %@", data);
 	
 	[data release];
 	data = nil;
@@ -56,36 +53,52 @@
 	[super dealloc];
 }
 
-- (void) _setupPipe: (NSPipe *) newPipe
+- (void) _setupPipe: (NSPipe *)newPipe
 {
-	NSAssert(pipe == nil, @"SWBufferedPipe is already set up!");
-	
 	data = [[NSMutableData alloc] init];
 	pipe = [newPipe retain];
+	handle = [pipe fileHandleForReading];
 	
-	NSFileHandle * handle = [pipe fileHandleForReading];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_readComplete:) name:NSFileHandleReadCompletionNotification object:handle];
-
-	[handle readInBackgroundAndNotify];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_dataAvailable:) name:NSFileHandleReadCompletionNotification object:handle];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_dataFinished:) name:NSFileHandleReadToEndOfFileCompletionNotification object:handle];
 }
 
-- (void) _readComplete: (NSNotification *)note {
-	NSAssert(data != nil, @"Buffer is not available or has been deallocated prematurely!!");
-	
+- (void) readInBackgroundAndNotify
+{
+    [handle readInBackgroundAndNotify];
+}
+
+- (void) readToEndOfFileInBackgroundAndNotify
+{
+    [handle readToEndOfFileInBackgroundAndNotify];
+}
+
+- (void) _dataAvailable: (NSNotification *)note
+{
 	NSData * readData = [[note userInfo] objectForKey:NSFileHandleNotificationDataItem];
 	
-	if ([readData length] > 0) {
-		//NSLog (@"==> %@", [[[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding] autorelease]);
-	
+	if ([readData length] > 0) {	
 		[data appendData:readData];
 		
-		if (delegate && [delegate respondsToSelector:@selector(bufferedPipe:hasNewDataAvailable:)]) {
-			[delegate bufferedPipe:self hasNewDataAvailable:readData];
+		if (delegate && [delegate respondsToSelector:@selector(bufferedPipe:dataAvailable:)]) {
+			[delegate bufferedPipe:self dataAvailable:readData];
 		}
 		
 		[[pipe fileHandleForReading] readInBackgroundAndNotify];
-	}	
+	}
+}
+
+- (void) _dataFinished: (NSNotification*)note
+{
+	NSData * readData = [[note userInfo] objectForKey:NSFileHandleNotificationDataItem];
+	
+	if ([readData length] > 0) {	
+		[data appendData:readData];
+		
+		if (delegate && [delegate respondsToSelector:@selector(bufferedPipe:dataFinished:)]) {
+			[delegate bufferedPipe:self dataFinished:data];
+		}		
+	}
 }
 
 @end
