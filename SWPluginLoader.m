@@ -31,10 +31,9 @@
 /* This will find all the paths where possible plugins could be located */
 - (NSSet*) applicationPluginSearchPaths {
 	if (!applicationPluginSearchPaths) {
-		NSBundle *appBundle;
+		//NSBundle * appBundle = [NSBundle mainBundle];
 		
 		NSString *appSupportSubpath = [NSString stringWithFormat:@"/Application Support/%@/PlugIns", applicationName];
-		appBundle = [NSBundle mainBundle];
 		NSString *builtInPath = [[NSBundle mainBundle] builtInPlugInsPath];
 		NSArray *librarySearchPaths;
 		NSEnumerator *searchPathEnum;
