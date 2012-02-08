@@ -12,11 +12,6 @@
 @implementation ABRecord (SWStandardFieldsAddition)
 
 - (NSString*) standardName {
-	NSString *orgName = [self valueForProperty:kABOrganizationProperty];
-	
-	if (orgName != nil)
-		return orgName;
-	
 	NSString *firstName, *lastName;
 	
 	firstName = [self valueForProperty:kABFirstNameProperty];
@@ -29,14 +24,24 @@
 	else if (lastName)
 		return lastName;
 	
+	NSString *orgName = [self valueForProperty:kABOrganizationProperty];
+	
+	if (orgName != nil)
+		return orgName;
+	
 	return nil;
 }
 
 - (NSImage*) standardImage {
-	if ([self respondsToSelector:@selector(imageData)] && [self imageData])
-		return [[[NSImage alloc] initWithData:[self imageData]] autorelease];
-	else
-		return nil;
+	if ([self respondsToSelector:@selector(imageData)]) {
+		NSData * imageData = [self performSelector:@selector(imageData)];
+		
+		if (imageData)
+			return [[[NSImage alloc] initWithData:imageData] autorelease];
+	}
+	
+	// else
+	return nil;
 }
 
 @end
