@@ -8,20 +8,6 @@
 
 #import "SWChangeNotificationAdditions.h"
 
-@implementation NSManagedObject (SWChangeNotificationAddition)
-
-+ (void) setKeys: (NSArray *)keys triggerChangeNotificationsForDependentKeys: (NSArray *)dependants {
-	NSEnumerator *dependantEnum = [dependants objectEnumerator];
-	id dependant;
-	
-	while ((dependant = [dependantEnum nextObject]) != nil) {
-		//NSLog (@"setKeys: %@ triggerChangeNotificationsForDependentKey: %@", keys, dependant);
-		[self setKeys: keys triggerChangeNotificationsForDependentKey: dependant];
-	}
-}
-
-@end
-
 @implementation NSObject (SWChangeNotificationAdditions)
 
 - (void) willChangeValueForKeys: (NSArray*)depends {

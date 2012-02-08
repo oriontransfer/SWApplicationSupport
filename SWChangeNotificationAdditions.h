@@ -8,13 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-@interface NSManagedObject (SWChangeNotificationAdditions)
-
-+ (void) setKeys:(NSArray *)keys triggerChangeNotificationsForDependentKeys: (NSArray *)dependants;
-
-@end
-
 @interface NSObject (SWChangeNotificationAdditions)
 
 - (void) willChangeValueForKeys: (NSArray*)depends;
