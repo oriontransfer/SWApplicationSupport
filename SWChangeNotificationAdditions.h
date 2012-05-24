@@ -1,9 +1,9 @@
 //
 //  NSManagedObject (SWChangeNotificationAddition).h
-//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
+//  Property Manager
 //
-//  Created by Samuel Williams on 23/10/05.
-//  Copyright 2005 Samuel Williams. All rights reserved.
+//  Created by Sammi on 23/10/05.
+//  Copyright 2005 Orion Transfer Ltd. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

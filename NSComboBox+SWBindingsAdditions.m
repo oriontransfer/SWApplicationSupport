@@ -1,9 +1,9 @@
 //
 //  NSComboBox+SWBindingsAdditions.m
-//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
+//  Property Manager
 //
 //  Created by Samuel Williams on 27/07/06.
-//  Copyright 2006 Samuel Williams. All rights reserved.
+//  Copyright 2006 Orion Transfer Ltd. All rights reserved.
 //
 
 #import "NSComboBox+SWBindingsAdditions.h"

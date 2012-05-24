@@ -61,8 +61,6 @@
 }
 
 - (id)transformedValue:(id)value {
-	NSLog (@"Transforming: %@ (%@)", value, [value class]);
-
 	if (value && [value isEqualTo:@""]) {
 		return nil;
 	}
@@ -71,8 +69,6 @@
 }
 
 - (id)reverseTransformedValue:(id)value {
-	NSLog (@"Reverse Transforming: %@ (%@)", value, [value class]);
-	
 	return value;
 }
 @end

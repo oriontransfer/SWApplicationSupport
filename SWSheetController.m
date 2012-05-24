@@ -8,66 +8,76 @@
 
 #import "SWSheetController.h"
 
+// 10.5 only
 const NSInteger SWSheetCancelled = -1;
 const NSInteger SWSheetProcessed = 0;
 
 @implementation SWSheetController
 
-@synthesize sheet, parent, delegate;
+@synthesize parent = _parent, sheet = _sheet, delegate = _delegate;
 
 - (IBAction)showSheet: (id)sender {
-    if (!sheet)
-        [self loadSheet];
-    
-    NSAssert(sheet != nil, @"Sheet was not loaded or set correctly!");
-    
-	[NSApp beginSheet: [self sheet]
-	   modalForWindow: parent
+	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
+	[NSApp beginSheet: self.sheet
+	   modalForWindow: _parent
 		modalDelegate: self
 	   didEndSelector: @selector(sheetDidEnd:returnCode:contextInfo:)
 		  contextInfo: nil];
 }
 
 - (IBAction)cancelSheet: (id) sender {
-	[NSApp endSheet:[self sheet] returnCode:-1];
+	[NSApp endSheet:self.sheet returnCode:-1];
 }
 
 - (IBAction)processSheet: (id) sender {
-	[NSApp endSheet:[self sheet] returnCode:0];
+	[NSApp endSheet:self.sheet returnCode:0];
 }
 
-- (void)sheetDidEnd:(NSWindow *)_sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {	
-	[sheet orderOut:self];
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+	NSAssert(sheet == _sheet, @"Inconsistent sheet supplied to controller.");
 	
-    if ([delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
-		[delegate sheetController:self didEndWithResult:returnCode];
-}
-
-- (id) init {
-	if (self = [super init]) {
-
-	}
+	if ([_delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
+		[_delegate sheetController:self didEndWithResult:returnCode];
 	
-	return self;
+	[_sheet close];
 }
 
-- (NSString*) nibName {
-	return nil;
+- (void) prepareSheet {
+	
 }
 
 - (void) loadSheet {
-	NSString* nibName = [self nibName];
-	
-	if (sheet == nil && nibName) {
-		BOOL result = [NSBundle loadNibNamed:[self nibName] owner:self];
+	if (_sheet == nil) {
+		NSString* nibName = [self nibName];
 		
-		NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
+		if (nibName) {
+			BOOL result = [NSBundle loadNibNamed:[self nibName] owner:self];
+			
+			NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
+		}
+	}
+	
+	if (!_prepared) {
+		_prepared = YES;
+		
+		[self prepareSheet];
 	}
 }
 
+- (NSString *) nibName {
+	return nil;
+}
+
+- (NSWindow *) sheet {	
+	[self loadSheet];
+	
+	return _sheet;
+}
+
 - (id)document {
-	if (parent) {
-		id windowController = [parent windowController];
+	if (_parent) {
+		id windowController = [_parent windowController];
+		
 		if (windowController) {
 			id document = [windowController document];
 			

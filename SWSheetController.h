@@ -14,33 +14,35 @@ const NSInteger SWSheetCancelled;
 const NSInteger SWSheetProcessed;
 
 @interface SWSheetController : NSObject {
-	IBOutlet NSWindow *sheet;
-	IBOutlet NSWindow *parent;
-		
-	id delegate;
+	NSWindow * _sheet;
+	NSWindow * _parent;
+	
+	bool _prepared;
+	
+	id _delegate;
 }
 
-@property(nonatomic,retain) NSWindow * sheet;
-@property(nonatomic,retain) NSWindow * parent;
-@property(assign) id delegate;
+@property (nonatomic,retain) IBOutlet NSWindow * parent;
+@property (nonatomic,retain) IBOutlet NSWindow * sheet;
+@property (nonatomic,assign) id delegate;
 
-- (id) init;
+// Override this to perform setup of the sheet before it is used:
+- (void)prepareSheet;
 
-// Used internally to load the sheet from a NIB file if it hasn't been explicitly set.
-- (void) loadSheet;
-// Override this to return the name of the nib that contains the sheet.
+// Ensure that the sheet is loaded:
+- (void)loadSheet;
+
+// Override this to return the name of the nib that contains the sheet
 - (NSString*) nibName;
 
 - (IBAction) showSheet: (id)sender;
 - (IBAction) cancelSheet: (id) sender;
 - (IBAction) processSheet: (id) sender;
-
-// Callback
 - (void) sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 
-// Convenience function
-- (id)document;
-- (id)managedObjectContext;
+/* Convenience function */
+- document;
+- managedObjectContext;
 
 @end
 

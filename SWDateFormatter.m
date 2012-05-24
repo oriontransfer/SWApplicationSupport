@@ -1,9 +1,9 @@
 //
 //  SWDateFormatter.m
-//  This file is part of the "SWApplicationSupport" project, and is distributed under the MIT License.
+//  Property Manager
 //
 //  Created by Samuel Williams on 14/12/09.
-//  Copyright 2009 Samuel Williams. All rights reserved.
+//  Copyright 2009 Orion Transfer Ltd. All rights reserved.
 //
 
 #import "SWDateFormatter.h"
@@ -17,7 +17,7 @@
 {
 	BOOL result = [super getObjectValue:anObject forString:aString range:rangep error:error]; 
 
-	if (!result && ((aString == nil) || ([aString isEqualToString:nilSymbol]))) { 
+	if (!result && ((aString == nil) || ([aString isEqualToString:nilSymbol]))) {
 		*anObject = nil;
 		result = YES;
 	}
@@ -26,7 +26,9 @@
 }
 
 - (void) dealloc {
-	[nilSymbol release];
+	nilSymbol = nil;
+	
+	[super dealloc];
 }
 
 @end
