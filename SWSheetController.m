@@ -18,11 +18,7 @@ const NSInteger SWSheetProcessed = 0;
 
 - (IBAction)showSheet: (id)sender {
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
-	[NSApp beginSheet: self.sheet
-	   modalForWindow: _parent
-		modalDelegate: self
-	   didEndSelector: @selector(sheetDidEnd:returnCode:contextInfo:)
-		  contextInfo: nil];
+	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 - (IBAction)cancelSheet: (id) sender {
