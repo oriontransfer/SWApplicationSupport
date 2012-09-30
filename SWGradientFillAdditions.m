@@ -86,8 +86,18 @@
 	
 	//can be setClip, but this may increase the current clipping rect beyond that intended
 	[self addClip];
-	
-	[context drawImage:gradientImage atPoint:[bottomLeft toCGPoint] fromRect:CGRectMake( 0.0, 0.0, [self bounds].size.width, [self bounds].size.height)];
+
+	CGRect frameBounds = {
+		{0.0, 0.0},
+		self.bounds.size
+	};
+
+	CGRect gradientBounds = {
+		[bottomLeft toCGPoint],
+		self.bounds.size
+	};
+
+	[context drawImage:gradientImage inRect:gradientBounds fromRect:frameBounds];
 	
 	[[NSGraphicsContext currentContext] restoreGraphicsState];
 }
