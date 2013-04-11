@@ -13,6 +13,12 @@
 const NSInteger SWSheetCancelled;
 const NSInteger SWSheetProcessed;
 
+@class SWSheetController;
+
+@protocol SWSheetDelegate
+- (void) sheetController: (SWSheetController*)controller didEndWithResult:(NSInteger) result;
+@end
+
 @interface SWSheetController : NSObject {
 	NSWindow * _sheet;
 	NSWindow * _parent;
@@ -36,9 +42,10 @@ const NSInteger SWSheetProcessed;
 - (NSString*) nibName;
 
 - (IBAction) showSheet: (id)sender;
+
 - (IBAction) cancelSheet: (id) sender;
 - (IBAction) processSheet: (id) sender;
-- (void) sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+- (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
 /* Convenience function */
 - document;
@@ -47,7 +54,5 @@ const NSInteger SWSheetProcessed;
 @end
 
 @interface NSObject (SWSheetControllerDelegate)
-
-- (void) sheetController: (SWSheetController*)controller didEndWithResult:(int) result;
-
+- (void) sheetController: (SWSheetController*)controller didEndWithResult:(NSInteger) result;
 @end

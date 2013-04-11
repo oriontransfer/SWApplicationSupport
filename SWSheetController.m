@@ -18,7 +18,7 @@ const NSInteger SWSheetProcessed = 0;
 
 - (IBAction)showSheet: (id)sender {
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
-	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:sender];
 }
 
 - (IBAction)cancelSheet: (id) sender {
@@ -29,13 +29,16 @@ const NSInteger SWSheetProcessed = 0;
 	[NSApp endSheet:self.sheet returnCode:0];
 }
 
-- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
 	NSAssert(sheet == _sheet, @"Inconsistent sheet supplied to controller.");
-	
+
+	[_sheet close];
+
 	if ([_delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
 		[_delegate sheetController:self didEndWithResult:returnCode];
-	
-	[_sheet close];
+
+	if (contextInfo && [(id)contextInfo conformsToProtocol:@protocol(SWSheetDelegate)])
+		[(id <SWSheetDelegate>)contextInfo sheetController:self didEndWithResult:returnCode];
 }
 
 - (void) prepareSheet {
