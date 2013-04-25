@@ -11,5 +11,6 @@
 @interface NSLocale (CurrencyRoundingBehaviour)
 
 - (id<NSDecimalNumberBehaviors>) currencyRoundingBehaviour;
++ (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviourForCurrencyCode:(NSString *)currencyCode;
 
 @end

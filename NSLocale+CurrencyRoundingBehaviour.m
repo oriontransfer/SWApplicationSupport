@@ -10,15 +10,20 @@
 
 @implementation NSLocale (CurrencyRoundingBehaviour)
 
-- (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviour {
-	NSString * currencyCode = [self objectForKey:NSLocaleCurrencyCode];
-	
++ (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviourForCurrencyCode:(NSString *)currencyCode
+{
 	int32_t defaultFractionDigits;
 	double roundingIncrement;
 	
 	CFNumberFormatterGetDecimalInfoForCurrencyCode((CFStringRef)currencyCode, &defaultFractionDigits, &roundingIncrement);
-	
+
 	return [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:defaultFractionDigits raiseOnExactness:NO raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
+}
+
+- (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviour {
+	NSString * currencyCode = [self objectForKey:NSLocaleCurrencyCode];
+
+	return [[self class] currencyRoundingBehaviourForCurrencyCode:currencyCode];
 }
 
 @end
