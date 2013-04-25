@@ -48,8 +48,8 @@ const NSInteger SWSheetProcessed;
 - (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
 /* Convenience function */
-- document;
-- managedObjectContext;
+- (NSDocument *) document;
+- (NSManagedObjectContext *) managedObjectContext;
 
 @end
 
