@@ -62,7 +62,7 @@
 - (NSString *)applicationSupportDirectory {
     NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
 
-    NSError *error;
+    NSError *error = nil;
     NSString *result = [self findOrCreateDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask subdirectory:executableName error:&error];
 
     if (error) {
