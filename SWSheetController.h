@@ -25,12 +25,12 @@ const NSInteger SWSheetProcessed;
 	
 	bool _prepared;
 	
-	id _delegate;
+	id __unsafe_unretained _delegate;
 }
 
-@property (nonatomic,retain) IBOutlet NSWindow * parent;
-@property (nonatomic,retain) IBOutlet NSWindow * sheet;
-@property (nonatomic,assign) id delegate;
+@property (nonatomic,strong) IBOutlet NSWindow * parent;
+@property (nonatomic,strong) IBOutlet NSWindow * sheet;
+@property (nonatomic,unsafe_unretained) id delegate;
 
 // Override this to perform setup of the sheet before it is used:
 - (void)prepareSheet;
@@ -39,7 +39,7 @@ const NSInteger SWSheetProcessed;
 - (void)loadSheet;
 
 // Override this to return the name of the nib that contains the sheet
-- (NSString*) nibName;
+@property (nonatomic, readonly, copy) NSString *nibName;
 
 - (IBAction) showSheet: (id)sender;
 
@@ -48,8 +48,8 @@ const NSInteger SWSheetProcessed;
 - (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 
 /* Convenience function */
-- (NSDocument *) document;
-- (NSManagedObjectContext *) managedObjectContext;
+@property (nonatomic, readonly, strong) NSDocument *document;
+@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 

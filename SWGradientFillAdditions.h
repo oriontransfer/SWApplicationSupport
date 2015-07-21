@@ -22,7 +22,7 @@
 
 - (CIVector*) bottomLeft: (CIVector*)other;
 
-- (CGPoint) toCGPoint;
+@property (nonatomic, readonly) CGPoint toCGPoint;
 
 @end
 

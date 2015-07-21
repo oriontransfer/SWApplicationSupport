@@ -18,7 +18,7 @@ const NSInteger SWSheetProcessed = 0;
 
 - (IBAction)showSheet: (id)sender {
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
-	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:sender];
+	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(sender)];
 }
 
 - (IBAction)cancelSheet: (id) sender {
@@ -37,8 +37,8 @@ const NSInteger SWSheetProcessed = 0;
 	if ([_delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
 		[_delegate sheetController:self didEndWithResult:returnCode];
 
-	if (contextInfo && [(id)contextInfo conformsToProtocol:@protocol(SWSheetDelegate)])
-		[(id <SWSheetDelegate>)contextInfo sheetController:self didEndWithResult:returnCode];
+	if (contextInfo && [(__bridge id)contextInfo conformsToProtocol:@protocol(SWSheetDelegate)])
+		[(__bridge id <SWSheetDelegate>)contextInfo sheetController:self didEndWithResult:returnCode];
 }
 
 - (void) prepareSheet {
@@ -50,7 +50,7 @@ const NSInteger SWSheetProcessed = 0;
 		NSString* nibName = [self nibName];
 		
 		if (nibName) {
-			BOOL result = [NSBundle loadNibNamed:[self nibName] owner:self];
+			BOOL result = [[NSBundle mainBundle] loadNibNamed:self.nibName owner:self topLevelObjects:nil];
 			
 			NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
 		}

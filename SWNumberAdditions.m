@@ -12,11 +12,11 @@
 @implementation NSDecimalNumber (SWDecimalNumberAdditions)
 
 + (NSDecimalNumber*) decimalNumberWithInt: (int)value {
-	return [[[NSDecimalNumber alloc] initWithInt:value] autorelease];
+	return [[NSDecimalNumber alloc] initWithInt:value];
 }
 
 + (NSDecimalNumber*) decimalNumberWithFloat: (float)value {
-	return [[[NSDecimalNumber alloc] initWithFloat:value] autorelease];
+	return [[NSDecimalNumber alloc] initWithFloat:value];
 
 }
 

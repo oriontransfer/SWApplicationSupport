@@ -37,7 +37,7 @@
 		NSData * imageData = [self performSelector:@selector(imageData)];
 		
 		if (imageData)
-			return [[[NSImage alloc] initWithData:imageData] autorelease];
+			return [[NSImage alloc] initWithData:imageData];
 	}
 	
 	// else

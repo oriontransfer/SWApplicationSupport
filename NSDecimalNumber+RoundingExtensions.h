@@ -10,15 +10,15 @@
 
 @interface NSDecimalNumber (RoundingExtensions)
 
-- (NSDecimalNumber *) decimalNumberByFlooring;
-- (NSDecimalNumber *) decimalNumberByCeiling;
+@property (nonatomic, readonly, copy) NSDecimalNumber *decimalNumberByFlooring;
+@property (nonatomic, readonly, copy) NSDecimalNumber *decimalNumberByCeiling;
 
 // Only works correctly for positive numbers:
-- (NSDecimalNumber *) fractionalPart;
+@property (nonatomic, readonly, copy) NSDecimalNumber *fractionalPart;
 
 + (NSDecimalNumber *) decimalNumberWithUnsignedInteger:(NSUInteger)integer;
 + (NSDecimalNumber *) decimalNumberWithNumerator:(NSUInteger)numerator denominator:(NSUInteger)denominator;
 
-- (NSDecimalNumber *) decimalNumberByNegating;
+@property (nonatomic, readonly, copy) NSDecimalNumber *decimalNumberByNegating;
 
 @end

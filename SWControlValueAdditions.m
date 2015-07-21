@@ -44,7 +44,7 @@
 }
 
 - (NSNumber*) boolNumberValue {
-	return [NSNumber numberWithBool:[self boolValue]];
+	return @([self boolValue]);
 }
 
 @end

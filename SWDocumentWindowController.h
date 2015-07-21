@@ -11,6 +11,6 @@
 
 @interface NSWindowController (SWDocumentWindowController)
 
-- (NSManagedObjectContext*) managedObjectContext;
+@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -32,7 +32,7 @@
 
 	NSAssert (array != nil, @"Cannot get selection from collection.. it isn't an array or an array controller");
 	
-	return [array objectAtIndex:index];
+	return array[index];
 }
 
 @end

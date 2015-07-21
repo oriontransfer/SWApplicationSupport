@@ -17,7 +17,7 @@
 - (void)setFixedTitle:(NSString *)fixedTitle
 {
 	self.usesItemFromMenu = NO;
-	self.menuItem = [[[NSMenuItem alloc] initWithTitle:@"Open Recent" action:nil keyEquivalent:@""] autorelease];
+	self.menuItem = [[NSMenuItem alloc] initWithTitle:@"Open Recent" action:nil keyEquivalent:@""];
 
 	[super setTitle:fixedTitle];
 }

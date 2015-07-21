@@ -14,7 +14,7 @@
 	static BOOL initialized = NO;
 	
 	if (!initialized) {
-		[NSValueTransformer setValueTransformer:[[[[self class] alloc] init] autorelease] forName:@"SWIsNilDate"];	
+		[NSValueTransformer setValueTransformer:[[[self class] alloc] init] forName:@"SWIsNilDate"];	
 		initialized = YES;
 	}
 }
@@ -29,7 +29,7 @@
 
 - (id)transformedValue:(id)value {
 	//NSLog (@"Transforming: %@", value);
-	return (value == nil) ? nil : [NSNumber numberWithBool:YES];
+	return (value == nil) ? nil : @YES;
 }
 
 - (id)reverseTransformedValue:(id)value {
@@ -47,7 +47,7 @@
 	static BOOL initialized = NO;
 	
 	if (!initialized) {
-		[NSValueTransformer setValueTransformer:[[[[self class] alloc] init] autorelease] forName:@"SWBlankStringIsNil"];	
+		[NSValueTransformer setValueTransformer:[[[self class] alloc] init] forName:@"SWBlankStringIsNil"];	
 		initialized = YES;
 	}
 }

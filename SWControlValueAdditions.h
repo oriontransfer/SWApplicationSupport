@@ -11,16 +11,15 @@
 
 @interface NSControl (SWControlNumberValue)
 
-- (NSNumber*)numberValue;
-- (NSDecimalNumber*)decimalNumberValue;
+@property (nonatomic, copy) NSNumber *numberValue;
+@property (nonatomic, readonly, copy) NSDecimalNumber *decimalNumberValue;
 
-- (void) setNumberValue: (NSNumber*)number;
 
 @end
 
 @interface NSButton (SWControlBoolValue)
 
-- (BOOL) boolValue;
-- (NSNumber*) boolNumberValue;
+@property (nonatomic, readonly) BOOL boolValue;
+@property (nonatomic, readonly, copy) NSNumber *boolNumberValue;
 
 @end

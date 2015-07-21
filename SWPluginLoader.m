@@ -11,7 +11,7 @@
 
 @implementation SWPluginLoader
 
-- initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName {
+- (instancetype) initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName {
 	if (self = [super init]) {
 		bundleType = [newBundleType copy];
 		applicationName = [appName copy];
@@ -52,17 +52,17 @@
 		
 		[bundleSearchPaths addObject:builtInPath];		
 		
-		applicationPluginSearchPaths = [[NSSet setWithArray:bundleSearchPaths] retain];
+		applicationPluginSearchPaths = [NSSet setWithArray:bundleSearchPaths];
 	}
 	
-	return [[applicationPluginSearchPaths retain] autorelease];
+	return applicationPluginSearchPaths;
 }
 
 /* This will find paths to all plugins available */
 - (NSSet*) pluginPaths {
 	if (!pluginPaths) {
 		NSSet *paths = [self applicationPluginSearchPaths];
-		NSMutableArray *bundlePaths = [[NSMutableArray new] autorelease];
+		NSMutableArray *bundlePaths = [NSMutableArray new];
 		
 		NSRange progress = NSMakeRange(0, [paths count]);
 		
@@ -79,17 +79,17 @@
 				[delegate pluginLoader:self didScan:currPath progress:progress];		
 		}
 		
-		pluginPaths = [[NSSet setWithArray:bundlePaths] retain];
+		pluginPaths = [NSSet setWithArray:bundlePaths];
 	}
 	
-	return [[pluginPaths retain] autorelease];
+	return pluginPaths;
 }
 
 /* Load all plugins */
 - (NSSet*) loadAllPlugins {
 	if (!loadedPlugins) {
 		NSSet *bundlePaths = [self pluginPaths];
-		NSMutableArray *allBundles = [[NSMutableArray new] autorelease];
+		NSMutableArray *allBundles = [NSMutableArray new];
 		
 		NSRange progress = NSMakeRange(0, [bundlePaths count]);
 		
@@ -113,20 +113,17 @@
 				[delegate pluginLoader:self didLoad:currPath result:bundle progress:progress];
 		}
 		
-		loadedPlugins = [[NSSet setWithArray:allBundles] retain];
+		loadedPlugins = [NSSet setWithArray:allBundles];
 	}
 	
-	return [[loadedPlugins retain] autorelease];
+	return loadedPlugins;
 }
 
 - (void) invalidateAllPlugins {
-	[applicationPluginSearchPaths release];
 	applicationPluginSearchPaths = nil;
 	
-	[pluginPaths release];
 	pluginPaths = nil;
 	
-	[loadedPlugins release];
 	loadedPlugins = nil;
 }
 
@@ -135,13 +132,10 @@
 - (void) dealloc {
 	[self invalidateAllPlugins];
 	
-	[bundleType release];
 	bundleType = nil;
 	
-	[applicationName release];
 	applicationName = nil;
 	
-	[super dealloc];
 }
 
 

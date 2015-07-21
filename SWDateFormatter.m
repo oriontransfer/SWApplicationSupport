@@ -25,10 +25,5 @@
 	return result;
 }
 
-- (void) dealloc {
-	nilSymbol = nil;
-	
-	[super dealloc];
-}
 
 @end

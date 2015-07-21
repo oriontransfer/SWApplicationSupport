@@ -20,14 +20,13 @@
 	NSString *applicationName;
 }
 
-- initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName;
+- (instancetype) initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName NS_DESIGNATED_INITIALIZER;
 
-- (void) setDelegate: (id)newDelegate;
-- (id) delegate;
+@property (nonatomic, unsafe_unretained) id delegate;
 
-- (NSSet*) applicationPluginSearchPaths;
-- (NSSet*) pluginPaths;
-- (NSSet*) loadAllPlugins;
+@property (nonatomic, readonly, copy) NSSet *applicationPluginSearchPaths;
+@property (nonatomic, readonly, copy) NSSet *pluginPaths;
+@property (nonatomic, readonly, copy) NSSet *loadAllPlugins;
 
 - (void) invalidateAllPlugins;
 

@@ -13,6 +13,6 @@
 	NSString * nilSymbol;
 }
 
-@property (retain) NSString * nilSymbol;
+@property (strong) NSString * nilSymbol;
 
 @end

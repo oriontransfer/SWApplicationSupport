@@ -41,7 +41,7 @@
 {
 	if (dateToUpdate != nil) {
 		NSDate * cur = [dateToUpdate dateValue];
-		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:cur];
+		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:cur];
 		[cmp setMonth: rowIndex + 1];
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
@@ -54,8 +54,8 @@
 - (IBAction) plusWeek: (id) sender {
 	if (dateToUpdate != nil) {
 		NSDate * cur = [dateToUpdate dateValue];
-		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit fromDate:cur];
-		[cmp setWeek:[cmp week] + 1];
+		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitWeekday fromDate:cur];
+		[cmp setWeekOfYear:[cmp weekOfYear] + 1];
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
 		[dateToUpdate setDateValue:next];
@@ -66,8 +66,8 @@
 - (IBAction) minusWeek: (id) sender {
 	if (dateToUpdate != nil) {
 		NSDate * cur = [dateToUpdate dateValue];
-		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit fromDate:cur];
-		[cmp setWeek:[cmp week] - 1];
+		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitWeekday fromDate:cur];
+		[cmp setWeekOfYear:[cmp weekOfYear] - 1];
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
 		[dateToUpdate setDateValue:next];

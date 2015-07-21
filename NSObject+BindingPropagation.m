@@ -21,7 +21,7 @@
 		return; //there is no binding
 	
 	//apply the value transformer, if one has been set
-	NSDictionary* bindingOptions = [bindingInfo objectForKey:NSOptionsKey];
+	NSDictionary* bindingOptions = bindingInfo[NSOptionsKey];
 	if (bindingOptions){
 		NSValueTransformer * transformer = [bindingOptions valueForKey:NSValueTransformerBindingOption];
 		if (!transformer || (id)transformer == [NSNull null]) {
@@ -40,13 +40,13 @@
 		}
 	}
 	
-	id boundObject = [bindingInfo objectForKey:NSObservedObjectKey];
+	id boundObject = bindingInfo[NSObservedObjectKey];
 	if (!boundObject || boundObject == [NSNull null]) {
 		NSLog(@"ERROR: NSObservedObjectKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
 		return;
 	}
 	
-	NSString* boundKeyPath = [bindingInfo objectForKey:NSObservedKeyPathKey];
+	NSString* boundKeyPath = bindingInfo[NSObservedKeyPathKey];
 	if (!boundKeyPath || (id)boundKeyPath == [NSNull null]) {
 		NSLog(@"ERROR: NSObservedKeyPathKey was nil for binding \"%@\" in %s", binding, __PRETTY_FUNCTION__);
 		return;

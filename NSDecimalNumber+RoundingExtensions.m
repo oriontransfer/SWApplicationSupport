@@ -14,7 +14,7 @@
 	static NSDecimalNumberHandler * behavior = nil;
 	
 	if (!behavior) {
-		behavior = [[NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:0 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO] retain];
+		behavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:0 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
 	}
 	
 	return [self decimalNumberByRoundingAccordingToBehavior:behavior];
@@ -24,7 +24,7 @@
 	static NSDecimalNumberHandler * behavior = nil;
 	
 	if (!behavior) {
-		behavior = [[NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:0 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO] retain];
+		behavior = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundUp scale:0 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:NO];
 	}
 	
 	return [self decimalNumberByRoundingAccordingToBehavior:behavior];
@@ -35,7 +35,7 @@
 }
 
 + (NSDecimalNumber *) decimalNumberWithUnsignedInteger:(NSUInteger)integer {
-	return [[[self.class alloc] initWithUnsignedInteger:integer] autorelease];
+	return [[self.class alloc] initWithUnsignedInteger:integer];
 }
 
 + (NSDecimalNumber *) decimalNumberWithNumerator:(NSUInteger)numerator denominator:(NSUInteger)denominator {

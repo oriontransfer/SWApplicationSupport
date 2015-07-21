@@ -48,7 +48,7 @@
     }
 	
     // Normally only need the first path
-    NSString * resolvedPath = [paths objectAtIndex:0];
+    NSString * resolvedPath = paths[0];
 		
     BOOL success = [self createDirectoryAtPath:resolvedPath withIntermediateDirectories:YES attributes:nil error:error];
 
@@ -60,7 +60,7 @@
 }
 
 - (NSString *)applicationSupportDirectory {
-    NSString *executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+    NSString *executableName = [[NSBundle mainBundle] infoDictionary][@"CFBundleExecutable"];
 
     NSError *error = nil;
     NSString *result = [self findOrCreateDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask subdirectory:executableName error:&error];

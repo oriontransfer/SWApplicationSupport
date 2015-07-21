@@ -10,7 +10,7 @@
 
 @interface NSLocale (CurrencyRoundingBehaviour)
 
-- (id<NSDecimalNumberBehaviors>) currencyRoundingBehaviour;
+@property (nonatomic, readonly, strong) id<NSDecimalNumberBehaviors> currencyRoundingBehaviour;
 + (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviourForCurrencyCode:(NSString *)currencyCode;
 
 @end

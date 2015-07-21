@@ -12,7 +12,7 @@
 
 - (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory inDomain:(NSSearchPathDomainMask)domainMask subdirectory:(NSString *)subdirectory error:(NSError **)error;
 
-- (NSString *)applicationSupportDirectory;
+@property (nonatomic, readonly, copy) NSString *applicationSupportDirectory;
 
 - (NSArray *)listDirectories:(NSSearchPathDirectory)searchPathDirectory inDomain:(NSSearchPathDomainMask)domainMask subdirectory:(NSString *)subdirectory;
 
