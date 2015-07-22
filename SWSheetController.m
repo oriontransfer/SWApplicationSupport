@@ -47,12 +47,16 @@ const NSInteger SWSheetProcessed = 0;
 
 - (void) loadSheet {
 	if (_sheet == nil) {
-		NSString* nibName = [self nibName];
+		NSString * nibName = [self nibName];
 		
 		if (nibName) {
-			BOOL result = [[NSBundle mainBundle] loadNibNamed:self.nibName owner:self topLevelObjects:nil];
+			NSArray * topLevelObjects = nil;
+
+			BOOL result = [[NSBundle mainBundle] loadNibNamed:self.nibName owner:self topLevelObjects:&topLevelObjects];
 			
 			NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
+
+			self.topLevelObjects = topLevelObjects;
 		}
 	}
 	

@@ -28,9 +28,11 @@ const NSInteger SWSheetProcessed;
 	id __unsafe_unretained _delegate;
 }
 
-@property (nonatomic,strong) IBOutlet NSWindow * parent;
-@property (nonatomic,strong) IBOutlet NSWindow * sheet;
-@property (nonatomic,unsafe_unretained) id delegate;
+@property(nonatomic,strong) NSArray * topLevelObjects;
+
+@property(nonatomic,strong) IBOutlet NSWindow * parent;
+@property(nonatomic,strong) IBOutlet NSWindow * sheet;
+@property(nonatomic,unsafe_unretained) id delegate;
 
 // Override this to perform setup of the sheet before it is used:
 - (void)prepareSheet;
