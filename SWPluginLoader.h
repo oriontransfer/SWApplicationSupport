@@ -20,6 +20,8 @@
 	NSString *applicationName;
 }
 
+- (instancetype) init NS_UNAVAILABLE;
+
 - (instancetype) initWithBundleType: (NSString*)newBundleType applicationName: (NSString*)appName NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, unsafe_unretained) id delegate;
