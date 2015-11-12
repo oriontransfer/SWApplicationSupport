@@ -14,25 +14,26 @@ const NSInteger SWSheetProcessed = 0;
 
 @implementation SWSheetController
 
-@synthesize parent = _parent, sheet = _sheet, delegate = _delegate;
-
 - (IBAction)showSheet: (id)sender {
+	NSAssert(self.window != nil, @"Sheet outlet must be set before showing sheet!");
+	NSAssert(self.parent != nil, @"Parent outlet must be set before showing sheet!");
+
 	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
-	[NSApp beginSheet:self.sheet modalForWindow:_parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(sender)];
+	[NSApp beginSheet:self.window modalForWindow:self.parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(sender)];
 }
 
 - (IBAction)cancelSheet: (id) sender {
-	[NSApp endSheet:self.sheet returnCode:-1];
+	[NSApp endSheet:self.window returnCode:-1];
 }
 
 - (IBAction)processSheet: (id) sender {
-	[NSApp endSheet:self.sheet returnCode:0];
+	[NSApp endSheet:self.window returnCode:0];
 }
 
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
-	NSAssert(sheet == _sheet, @"Inconsistent sheet supplied to controller.");
+	NSAssert(sheet == self.window, @"Inconsistent sheet supplied to controller.");
 
-	[_sheet close];
+	[self close];
 
 	if ([_delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
 		[_delegate sheetController:self didEndWithResult:returnCode];
@@ -42,50 +43,34 @@ const NSInteger SWSheetProcessed = 0;
 }
 
 - (void) prepareSheet {
-	
 }
 
-- (void) loadSheet {
-	if (_sheet == nil) {
-		NSString * nibName = [self nibName];
-		
-		if (nibName) {
-			NSArray * topLevelObjects = nil;
-
-			BOOL result = [[NSBundle mainBundle] loadNibNamed:self.nibName owner:self topLevelObjects:&topLevelObjects];
-			
-			NSAssert(result == YES, ([NSString stringWithFormat:@"Could not load sheet nib %@", [self nibName]]));
-
-			self.topLevelObjects = topLevelObjects;
-		}
-	}
+- (NSString *)nibName {
+	NSLog(@"Warning: SWSheetController#nibName not implemented!");
 	
-	if (!_prepared) {
-		_prepared = YES;
-		
-		[self prepareSheet];
-	}
-}
-
-- (NSString *) nibName {
 	return nil;
 }
 
-- (NSWindow *) sheet {	
-	[self loadSheet];
-	
-	return _sheet;
+- (NSString *)windowNibName {
+	return [self nibName];
+}
+
+- (void)windowDidLoad
+{
+	[self prepareSheet];
 }
 
 - (id)document {
-	if (_parent) {
-		id windowController = [_parent windowController];
+	if (self.parent) {
+		id windowController = [self.parent windowController];
 		
 		if (windowController) {
 			id document = [windowController document];
 			
 			return document;
 		}
+	} else {
+		NSLog(@"Trying to get document but no parent specified!");
 	}
 	
 	return nil;
