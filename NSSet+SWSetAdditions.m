@@ -8,6 +8,8 @@
 
 #import "NSSet+SWSetAdditions.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 @implementation NSSet (SWSetAdditions)
 
@@ -64,3 +66,5 @@
 }
 
 @end
+
+#pragma clang diagnostic pop
