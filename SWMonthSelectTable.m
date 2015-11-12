@@ -76,8 +76,8 @@
 }
 
 - (id)tableView:(NSTableView *)aTableView
-    objectValueForTableColumn:(NSTableColumn *)aTableColumn
-    row:(int)rowIndex
+	objectValueForTableColumn:(NSTableColumn *)aTableColumn
+	row:(int)rowIndex
 {	
 	if ([[aTableColumn identifier] isEqualTo:@"Number"]) {
 		return [NSString stringWithFormat:@"%d", rowIndex + 1];
@@ -90,7 +90,7 @@
 
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return 12;
+	return 12;
 }
 
 @end

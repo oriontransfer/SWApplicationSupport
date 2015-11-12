@@ -26,8 +26,8 @@
 - (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(int)rowIndex;
 
 - (id)tableView:(NSTableView *)aTableView
-    objectValueForTableColumn:(NSTableColumn *)aTableColumn
-    row:(int)rowIndex;
+	objectValueForTableColumn:(NSTableColumn *)aTableColumn
+	row:(int)rowIndex;
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView;
 

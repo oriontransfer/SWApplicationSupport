@@ -12,7 +12,7 @@
 
 - (NSArray *)listDirectories:(NSSearchPathDirectory)searchPathDirectory inDomain:(NSSearchPathDomainMask)domainMask subdirectory:(NSString *)subdirectory {
 	// Search for the path
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, domainMask, YES);
+	NSArray * paths = NSSearchPathForDirectoriesInDomains(searchPathDirectory, domainMask, YES);
 	
 	if (subdirectory == nil) {
 		return paths;
@@ -43,16 +43,16 @@
 {
 	NSArray * paths = [self listDirectories:searchPathDirectory inDomain:domainMask subdirectory:subdirectory];
 
-    if (paths.count == 0) {
-        return nil;
-    }
+	if (paths.count == 0) {
+		return nil;
+	}
 	
-    // Normally only need the first path
-    NSString * resolvedPath = paths[0];
+	// Normally only need the first path
+	NSString * resolvedPath = paths[0];
 		
-    BOOL success = [self createDirectoryAtPath:resolvedPath withIntermediateDirectories:YES attributes:nil error:error];
+	BOOL success = [self createDirectoryAtPath:resolvedPath withIntermediateDirectories:YES attributes:nil error:error];
 
-    if (success) {
+	if (success) {
 		return resolvedPath;
 	} else {
 		return nil;
@@ -60,16 +60,16 @@
 }
 
 - (NSString *)applicationSupportDirectory {
-    NSString *executableName = [[NSBundle mainBundle] infoDictionary][@"CFBundleExecutable"];
+	NSString *executableName = [[NSBundle mainBundle] infoDictionary][@"CFBundleExecutable"];
 
-    NSError *error = nil;
-    NSString *result = [self findOrCreateDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask subdirectory:executableName error:&error];
+	NSError *error = nil;
+	NSString *result = [self findOrCreateDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask subdirectory:executableName error:&error];
 
-    if (error) {
-        NSLog(@"Unable to find or create application support directory: %@", error);
-    }
+	if (error) {
+		NSLog(@"Unable to find or create application support directory: %@", error);
+	}
 	
-    return result;
+	return result;
 }
 
 - (NSArray *)findExistingPaths:(NSArray*)paths withSubdirectory:(NSString*)subdirectory {
