@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+BindingPropagation.h"
+#import <AppKit/NSKeyValueBinding.h>
 
 @implementation NSObject (BindingPropagation)
 

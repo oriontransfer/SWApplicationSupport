@@ -8,18 +8,15 @@
 
 #import "SWSheetController.h"
 
-// 10.5 only
-const NSInteger SWSheetCancelled = -1;
-const NSInteger SWSheetProcessed = 0;
-
 @implementation SWSheetController
 
 - (IBAction)showSheet: (id)sender {
 	NSAssert(self.window != nil, @"Sheet outlet must be set before showing sheet!");
 	NSAssert(self.parent != nil, @"Parent outlet must be set before showing sheet!");
 
-	//NSLog (@"beginSheet: %@ modalForWindow: %@ modalDelegate: %@", [self sheet], parent, self);
-	[NSApp beginSheet:self.window modalForWindow:self.parent modalDelegate:self didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:) contextInfo:(__bridge void *)(sender)];
+	[self.parent beginSheet:self.window completionHandler:^(NSModalResponse returnCode) {
+		[self sheetDidEnd:self.window returnCode:returnCode contextInfo:sender];
+	}];
 }
 
 - (IBAction)cancelSheet: (id) sender {
@@ -30,7 +27,7 @@ const NSInteger SWSheetProcessed = 0;
 	[NSApp endSheet:self.window returnCode:0];
 }
 
-- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+- (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(id)contextInfo {
 	NSAssert(sheet == self.window, @"Inconsistent sheet supplied to controller.");
 
 	[self close];
@@ -38,8 +35,8 @@ const NSInteger SWSheetProcessed = 0;
 	if ([_delegate respondsToSelector:@selector(sheetController:didEndWithResult:)])
 		[_delegate sheetController:self didEndWithResult:returnCode];
 
-	if (contextInfo && [(__bridge id)contextInfo conformsToProtocol:@protocol(SWSheetDelegate)])
-		[(__bridge id <SWSheetDelegate>)contextInfo sheetController:self didEndWithResult:returnCode];
+	if (contextInfo && [contextInfo conformsToProtocol:@protocol(SWSheetDelegate)])
+		[contextInfo sheetController:self didEndWithResult:returnCode];
 }
 
 - (void) prepareSheet {

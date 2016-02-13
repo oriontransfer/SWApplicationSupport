@@ -8,11 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-/* This controller can be used to connect two separate NIBs together */
-
-const NSInteger SWSheetCancelled;
-const NSInteger SWSheetProcessed;
-
 @class SWSheetController;
 
 @protocol SWSheetDelegate
@@ -34,7 +29,7 @@ const NSInteger SWSheetProcessed;
 
 - (IBAction) cancelSheet: (id) sender;
 - (IBAction) processSheet: (id) sender;
-- (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+- (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(id)contextInfo;
 
 /* Convenience function */
 @property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
