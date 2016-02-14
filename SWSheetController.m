@@ -20,11 +20,11 @@
 }
 
 - (IBAction)cancelSheet: (id) sender {
-	[NSApp endSheet:self.window returnCode:-1];
+	[self.parent endSheet:self.window returnCode:-1];
 }
 
 - (IBAction)processSheet: (id) sender {
-	[NSApp endSheet:self.window returnCode:0];
+	[self.parent endSheet:self.window returnCode:0];
 }
 
 - (void)sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(id)contextInfo {
