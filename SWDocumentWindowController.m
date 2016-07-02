@@ -12,10 +12,10 @@
 @implementation NSWindowController (SWDocumentWindowController)
 
 - (NSManagedObjectContext*) managedObjectContext {
-	NSPersistentDocument *doc = [self document];
+	NSPersistentDocument *doc = self.document;
 	
 	if (doc)
-		return [doc managedObjectContext];
+		return doc.managedObjectContext;
 	
 	return nil;
 }

@@ -31,7 +31,7 @@
 }
 
 - (NSDecimalNumber *)fractionalPart {
-	return [self decimalNumberBySubtracting:[self decimalNumberByFlooring]];
+	return [self decimalNumberBySubtracting:self.decimalNumberByFlooring];
 }
 
 + (NSDecimalNumber *) decimalNumberWithUnsignedInteger:(NSUInteger)integer {

@@ -15,7 +15,7 @@
 
 - (NSSet*) subsetConformingTo: (SEL)selector {
 	NSEnumerator *setEnumerator = [self objectEnumerator];
-	NSMutableSet *newSet = [NSMutableSet setWithCapacity:[self count]];
+	NSMutableSet *newSet = [NSMutableSet setWithCapacity:self.count];
 	id object = nil;
 	
 	while ((object = [setEnumerator nextObject])) {
@@ -28,7 +28,7 @@
 
 - (NSSet*) subsetNotConformingTo: (SEL)selector {
 	NSEnumerator *setEnumerator = [self objectEnumerator];
-	NSMutableSet *newSet = [NSMutableSet setWithCapacity:[self count]];
+	NSMutableSet *newSet = [NSMutableSet setWithCapacity:self.count];
 	id object = nil;
 	
 	while ((object = [setEnumerator nextObject])) {
@@ -41,7 +41,7 @@
 
 - (NSSet*) subsetConformingTo: (SEL)selector withObject: (id)arg {
 	NSEnumerator *setEnumerator = [self objectEnumerator];
-	NSMutableSet *newSet = [NSMutableSet setWithCapacity:[self count]];
+	NSMutableSet *newSet = [NSMutableSet setWithCapacity:self.count];
 	id object = nil;
 	
 	while ((object = [setEnumerator nextObject])) {
@@ -54,7 +54,7 @@
 
 - (NSSet*) subsetNotConformingTo: (SEL)selector withObject: (id)arg {
 	NSEnumerator *setEnumerator = [self objectEnumerator];
-	NSMutableSet *newSet = [NSMutableSet setWithCapacity:[self count]];
+	NSMutableSet *newSet = [NSMutableSet setWithCapacity:self.count];
 	id object = nil;
 	
 	while ((object = [setEnumerator nextObject])) {

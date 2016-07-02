@@ -59,7 +59,7 @@
 
 - (id)document {
 	if (self.parent) {
-		id windowController = [self.parent windowController];
+		id windowController = (self.parent).windowController;
 		
 		if (windowController) {
 			id document = [windowController document];
@@ -74,7 +74,7 @@
 }
 
 - (id)managedObjectContext {
-	id document = [self document];
+	id document = self.document;
 	
 	if (document)
 		return [document managedObjectContext];

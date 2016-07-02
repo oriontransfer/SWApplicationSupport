@@ -19,31 +19,31 @@
 }
 
 - (float) lesserX: (CIVector*)other {
-	if ([self X] < [other X])
-		return [self X];
+	if (self.X < other.X)
+		return self.X;
 	else
-		return [other X];
+		return other.X;
 }
 
 - (float) lesserY: (CIVector*)other {
-	if ([self Y] < [other Y])
-		return [self Y];
+	if (self.Y < other.Y)
+		return self.Y;
 	else
-		return [other Y];
+		return other.Y;
 }
 
 - (float) lesserZ: (CIVector*)other {
-	if ([self Z] < [other Z])
-		return [self Z];
+	if (self.Z < other.Z)
+		return self.Z;
 	else
-		return [other Z];
+		return other.Z;
 }
 
 - (float) lesserW: (CIVector*)other {
-	if ([self W] < [other W])
-		return [self W];
+	if (self.W < other.W)
+		return self.W;
 	else
-		return [other W];
+		return other.W;
 }
 
 - (CIVector*) bottomLeft: (CIVector*)other {
@@ -51,7 +51,7 @@
 }
 
 - (CGPoint) toCGPoint {
-	return CGPointMake([self X], [self Y]);
+	return CGPointMake(self.X, self.Y);
 }
 
 @end
@@ -64,8 +64,8 @@
 	inStartColor = [inStartColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	inEndColor = [inEndColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
 	
-	CIColor* startColor = [CIColor colorWithRed:[inStartColor redComponent] green:[inStartColor greenComponent] blue:[inStartColor blueComponent] alpha:[inStartColor alphaComponent]];
-	CIColor* endColor = [CIColor colorWithRed:[inEndColor redComponent] green:[inEndColor greenComponent] blue:[inEndColor blueComponent] alpha:[inEndColor alphaComponent]];
+	CIColor* startColor = [CIColor colorWithRed:inStartColor.redComponent green:inStartColor.greenComponent blue:inStartColor.blueComponent alpha:inStartColor.alphaComponent];
+	CIColor* endColor = [CIColor colorWithRed:inEndColor.redComponent green:inEndColor.greenComponent blue:inEndColor.blueComponent alpha:inEndColor.alphaComponent];
 	
 	CIVector *bottomLeft = [startVector bottomLeft:endVector];
 	
@@ -82,7 +82,7 @@
 	
 	[[NSGraphicsContext currentContext] saveGraphicsState];
 	
-	CIContext* context = [[NSGraphicsContext currentContext] CIContext];
+	CIContext* context = [NSGraphicsContext currentContext].CIContext;
 	
 	//can be setClip, but this may increase the current clipping rect beyond that intended
 	[self addClip];
@@ -93,7 +93,7 @@
 	};
 
 	CGRect gradientBounds = {
-		[bottomLeft toCGPoint],
+		bottomLeft.toCGPoint,
 		self.bounds.size
 	};
 
@@ -103,7 +103,7 @@
 }
 
 - (void) fillVerticalGradientTop: (NSColor*)top bottom: (NSColor*)bottom {
-	NSRect bounds = [self bounds];
+	NSRect bounds = self.bounds;
 	
 	NSPoint a = bounds.origin;
 	NSPoint b = NSMakePoint(bounds.origin.x, bounds.origin.y + bounds.size.height);
@@ -112,7 +112,7 @@
 }
 
 - (void) fillHorizontalGradientLeft: (NSColor*)left right: (NSColor*)right {
-	NSRect bounds = [self bounds];
+	NSRect bounds = self.bounds;
 	
 	NSPoint a = bounds.origin;
 	NSPoint b = NSMakePoint(bounds.origin.x + bounds.size.width, bounds.origin.y);
@@ -133,7 +133,7 @@
 }
 
 - (void)drawRect:(NSRect)rect {
-	NSRect viewBounds = [self bounds];
+	NSRect viewBounds = self.bounds;
 	NSBezierPath *p = [NSBezierPath bezierPathWithRect:viewBounds];
 	NSColor *c = [[NSColor blueColor] colorWithAlphaComponent:0.1];
 	

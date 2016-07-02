@@ -34,7 +34,7 @@
 		//NSBundle * appBundle = [NSBundle mainBundle];
 		
 		NSString *appSupportSubpath = [NSString stringWithFormat:@"/Application Support/%@/PlugIns", applicationName];
-		NSString *builtInPath = [[NSBundle mainBundle] builtInPlugInsPath];
+		NSString *builtInPath = [NSBundle mainBundle].builtInPlugInsPath;
 		NSArray *librarySearchPaths;
 		NSEnumerator *searchPathEnum;
 		NSMutableArray *bundleSearchPaths = [NSMutableArray array];
@@ -61,10 +61,10 @@
 /* This will find paths to all plugins available */
 - (NSSet*) pluginPaths {
 	if (!pluginPaths) {
-		NSSet *paths = [self applicationPluginSearchPaths];
+		NSSet *paths = self.applicationPluginSearchPaths;
 		NSMutableArray *bundlePaths = [NSMutableArray new];
 		
-		NSRange progress = NSMakeRange(0, [paths count]);
+		NSRange progress = NSMakeRange(0, paths.count);
 		
 		NSEnumerator *searchPathEnum = [paths objectEnumerator];
 		NSString *currPath;
@@ -88,10 +88,10 @@
 /* Load all plugins */
 - (NSSet*) loadAllPlugins {
 	if (!loadedPlugins) {
-		NSSet *bundlePaths = [self pluginPaths];
+		NSSet *bundlePaths = self.pluginPaths;
 		NSMutableArray *allBundles = [NSMutableArray new];
 		
-		NSRange progress = NSMakeRange(0, [bundlePaths count]);
+		NSRange progress = NSMakeRange(0, bundlePaths.count);
 		
 		NSEnumerator *bundlePathEnum = [bundlePaths objectEnumerator];
 		NSString *currPath;

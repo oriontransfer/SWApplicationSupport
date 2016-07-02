@@ -40,12 +40,12 @@
 - (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(int)rowIndex
 {
 	if (dateToUpdate != nil) {
-		NSDate * cur = [dateToUpdate dateValue];
+		NSDate * cur = dateToUpdate.dateValue;
 		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:cur];
-		[cmp setMonth: rowIndex + 1];
+		cmp.month = rowIndex + 1;
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
-		[dateToUpdate setDateValue:next];
+		dateToUpdate.dateValue = next;
 	}
 
 	return YES;
@@ -53,24 +53,24 @@
 
 - (IBAction) plusWeek: (id) sender {
 	if (dateToUpdate != nil) {
-		NSDate * cur = [dateToUpdate dateValue];
+		NSDate * cur = dateToUpdate.dateValue;
 		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitWeekday fromDate:cur];
-		[cmp setWeekOfYear:[cmp weekOfYear] + 1];
+		cmp.weekOfYear = cmp.weekOfYear + 1;
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
-		[dateToUpdate setDateValue:next];
+		dateToUpdate.dateValue = next;
 	}
 
 }
 
 - (IBAction) minusWeek: (id) sender {
 	if (dateToUpdate != nil) {
-		NSDate * cur = [dateToUpdate dateValue];
+		NSDate * cur = dateToUpdate.dateValue;
 		NSDateComponents * cmp = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitWeekday fromDate:cur];
-		[cmp setWeekOfYear:[cmp weekOfYear] - 1];
+		cmp.weekOfYear = cmp.weekOfYear - 1;
 		NSDate * next = [[NSCalendar currentCalendar] dateFromComponents:cmp];
 		
-		[dateToUpdate setDateValue:next];
+		dateToUpdate.dateValue = next;
 	}
 
 }
@@ -79,9 +79,9 @@
 	objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	row:(int)rowIndex
 {	
-	if ([[aTableColumn identifier] isEqualTo:@"Number"]) {
+	if ([aTableColumn.identifier isEqualTo:@"Number"]) {
 		return [NSString stringWithFormat:@"%d", rowIndex + 1];
-	} else if ([[aTableColumn identifier] isEqualTo:@"Month"]) {
+	} else if ([aTableColumn.identifier isEqualTo:@"Month"]) {
 		return [self monthNameForNumber: rowIndex + 1];
 	}
 	

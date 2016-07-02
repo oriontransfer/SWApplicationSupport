@@ -32,7 +32,7 @@
 	
 	title = [NSString stringWithFormat:@"%@ %@", prefix, postfix];
 	
-	[self setTitle:title];
+	self.title = title;
 }
 
 @end

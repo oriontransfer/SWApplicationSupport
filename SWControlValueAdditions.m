@@ -12,24 +12,24 @@
 @implementation NSControl (SWControlNumberValue)
 
 - (NSNumber*)numberValue {
-	if ([self formatter])
-		return [[self formatter] numberFromString:[self stringValue]];
+	if (self.formatter)
+		return [self.formatter numberFromString:self.stringValue];
 	else
 		return nil;
 }
 
 - (NSDecimalNumber*)decimalNumberValue {
-	if ([self formatter])
-		return [NSDecimalNumber decimalNumberWithDecimal:[[self numberValue] decimalValue]];
+	if (self.formatter)
+		return [NSDecimalNumber decimalNumberWithDecimal:self.numberValue.decimalValue];
 	else
-		return [NSDecimalNumber decimalNumberWithString:[self stringValue]];
+		return [NSDecimalNumber decimalNumberWithString:self.stringValue];
 }
 
 - (void) setNumberValue: (NSNumber*)number {
-	if ([self formatter])
-		[self setStringValue:[[self formatter] stringFromNumber:number]];
+	if (self.formatter)
+		self.stringValue = [self.formatter stringFromNumber:number];
 	else// if ([number isKindOfClass:[NSDecimalNumber class]])
-		[self setStringValue:[(NSDecimalNumber*)number description]];
+		self.stringValue = ((NSDecimalNumber*)number).description;
 }
 
 @end
@@ -37,14 +37,14 @@
 @implementation NSButton (SWControlBoolValue)
 
 - (BOOL) boolValue {
-	if ([self state] == NSOnState)
+	if (self.state == NSOnState)
 		return YES;
 	else
 		return NO;
 }
 
 - (NSNumber*) boolNumberValue {
-	return @([self boolValue]);
+	return @(self.boolValue);
 }
 
 @end

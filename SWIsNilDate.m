@@ -34,7 +34,7 @@
 
 - (id)reverseTransformedValue:(id)value {
 	//NSLog (@"Reverse Transforming: %@", value);
-	if ([(NSNumber*)value boolValue])
+	if (((NSNumber*)value).boolValue)
 		return [NSDate date];
 	else
 		return nil;

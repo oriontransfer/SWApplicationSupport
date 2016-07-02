@@ -12,14 +12,14 @@
 @implementation NSComboBox (SWBindingsAdditions)
 
 - (id) selectedObjectInArray: (id)collection {
-	int index = [self indexOfSelectedItem];
+	int index = self.indexOfSelectedItem;
 	NSLog (@"Index: %d", index);
 	
 	NSArray *array = nil;
 	
 	if (index == -1) {
 		// We need to match by string value
-		index = [self indexOfItemWithObjectValue:[self stringValue]];
+		index = [self indexOfItemWithObjectValue:self.stringValue];
 	}
 	
 	// If index is still -1

@@ -19,7 +19,7 @@
 }
 
 - (void) recursivelySetEnabled: (BOOL)enabled {
-	NSArray *subviews = [self subviews];
+	NSArray *subviews = self.subviews;
 	NSEnumerator *iter = [subviews objectEnumerator];
 	id childView;
 	

@@ -15,7 +15,7 @@
 - (void)drawCenteredInRect:(NSRect)inRect operation:(NSCompositingOperation)op fraction:(CGFloat)delta
 {
 	NSRect srcRect = NSZeroRect;
-	srcRect.size = [self size];
+	srcRect.size = self.size;
 	
 	// create a destination rect scaled to fit inside the frame
 	NSRect drawnRect = srcRect;
