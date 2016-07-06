@@ -12,6 +12,8 @@
 
 + (id<NSDecimalNumberBehaviors>)currencyRoundingBehaviourForCurrencyCode:(NSString *)currencyCode
 {
+	NSAssert(currencyCode != nil, @"Currency code must not be nil!");
+
 	int32_t defaultFractionDigits;
 	double roundingIncrement;
 	
