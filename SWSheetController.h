@@ -32,7 +32,7 @@
 - (void) sheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(id)contextInfo;
 
 /* Convenience function */
-@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
+- (NSManagedObjectContext *)managedObjectContext;
 
 @end
 
