@@ -8,6 +8,8 @@
 
 #import "SWGradientFillAdditions.h"
 
+#import <CoreImage/CoreImage.h>
+
 @implementation CIVector (SWConstructorsAddition)
 
 + (CIVector*) vectorWithSize: (NSSize)size {
